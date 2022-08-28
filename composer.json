@@ -1,0 +1,32 @@
+{
+    "name": "super-simple/cache",
+    "description": "The PHP cache library implementing psr-16.",
+    "type": "library",
+    "keywords": ["cache", "simple cache", "php cache library"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aleksandar Todorov",
+            "email": "aleksandr.todorov@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SSCache\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SSCache\\UnitTest\\": "tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.1",
+        "psr/simple-cache": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=9.1"
+    }
+}
