@@ -37,7 +37,7 @@ The $ttl could be int, null or \DateInterval
 
 The storage must implement SSCache\CacheStorageInterface.
 
-It's up to you how to handler $ttl.
+It's up to you how to handle $ttl in the storage.
 
 For more details check out the [wiki].
 
