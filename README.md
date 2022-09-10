@@ -2,7 +2,7 @@
 
 A simple cache library implementing PSR-16.
 
-![Build Status](https://github.com/alextodorov/super-simple-cache/actions/workflows/build.yml/badge.svg?branch=main) [![codecov](https://codecov.io/gh/alextodorov/super-simple-cache/branch/main/graph/badge.svg?token=4RUNRVHM2L)](https://codecov.io/gh/alextodorov/super-simple-cache) [![Latest Stable Version](http://poser.pugx.org/super-simple/cache/v)](https://packagist.org/packages/super-simple/cache) [![PHP Version Require](http://poser.pugx.org/super-simple/cache/require/php)](https://packagist.org/packages/super-simple/cache) [![License](http://poser.pugx.org/super-simple/cache/license)](https://packagist.org/packages/super-simple/cache) [![Total Downloads](http://poser.pugx.org/super-simple/cache/downloads)](https://packagist.org/packages/super-simple/cache)
+![Build Status](https://github.com/alextodorov/super-simple-cache/actions/workflows/build.yml/badge.svg?branch=main) [![codecov](https://codecov.io/gh/alextodorov/super-simple-cache/branch/main/graph/badge.svg?token=AHKTD7FAQX)](https://codecov.io/gh/alextodorov/super-simple-cache) [![Latest Stable Version](http://poser.pugx.org/super-simple/cache/v)](https://packagist.org/packages/super-simple/cache) [![PHP Version Require](http://poser.pugx.org/super-simple/cache/require/php)](https://packagist.org/packages/super-simple/cache) [![License](http://poser.pugx.org/super-simple/cache/license)](https://packagist.org/packages/super-simple/cache) [![Total Downloads](http://poser.pugx.org/super-simple/cache/downloads)](https://packagist.org/packages/super-simple/cache)
 
 Install
 -------
