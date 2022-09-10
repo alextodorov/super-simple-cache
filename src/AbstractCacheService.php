@@ -2,27 +2,60 @@
 
 namespace SSCache;
 
-use DateInterval;
+use Closure;
 
 abstract class AbstractCacheService
 {
-    public function validateKey(string $key): bool
+    public function __construct(protected CacheStorageInterface $storage, protected bool $canSerialize = true)
     {
-        return true;
     }
 
-    public function validateKeys(array $keys): bool
+    public function validateKey(string $key): void
     {
-        return true;
+        if (preg_match('/^[a-zA-Z0-9_.:]+$/', $key) !== 1) {
+            throw new InvalidKey('Invalid Cache Key');
+        }
     }
 
-    public function validateAndSerialize(array $data): bool
+    public function validateKeys(iterable $keys): void
     {
-        return true;
+        foreach ($keys as $key) {
+            $this->validateKey($key);
+        }
     }
 
-    public function getWithClosure(string $key, callable $callback, DateInterval|int|null $ttl): mixed
+    public function serializeValues(iterable &$values = []): void
     {
-        return [];
+        foreach ($values as $key => $value) {
+            if ($this->isInvalid($key, $value)) {
+                throw new InvalidArgument('Invalid value for key: ' . $key);
+            }
+
+            $values[$key] = \serialize($value);
+        }
+    }
+
+    public function getWithClosure(string $key, Closure $closure): mixed
+    {
+        return $closure->call($this->storage, $key);
+    }
+
+    public function enableSerialization(): void
+    {
+        $this->canSerialize = true;
+    }
+
+    public function disableSerialization(): void
+    {
+        $this->canSerialize = false;
+    }
+
+    public function isInvalid(string $key, mixed $value): bool
+    {
+        if (\is_resource($value) || (\is_object($value) && !\method_exists($value, '__serialize'))) {
+            return true;
+        }
+
+        return false;
     }
 }
