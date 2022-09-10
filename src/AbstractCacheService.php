@@ -6,7 +6,9 @@ use Closure;
 
 abstract class AbstractCacheService
 {
-    public function __construct(protected CacheStorageInterface $storage, protected bool $canSerialize = true)
+    protected bool $canSerialize = true;
+
+    public function __construct(protected CacheStorageInterface $storage)
     {
     }
 
@@ -27,7 +29,7 @@ abstract class AbstractCacheService
     public function serializeValues(iterable &$values = []): void
     {
         foreach ($values as $key => $value) {
-            if ($this->isInvalid($key, $value)) {
+            if ($this->isInvalid($value)) {
                 throw new InvalidArgument('Invalid value for key: ' . $key);
             }
 
@@ -50,7 +52,7 @@ abstract class AbstractCacheService
         $this->canSerialize = false;
     }
 
-    public function isInvalid(string $key, mixed $value): bool
+    public function isInvalid(mixed $value): bool
     {
         if (\is_resource($value) || (\is_object($value) && !\method_exists($value, '__serialize'))) {
             return true;

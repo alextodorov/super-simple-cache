@@ -48,8 +48,8 @@ class CacheService extends AbstractCacheService implements CacheInterface
     {
         $this->validateKey($key);
 
-        $data[$key] = $value;
-       
+        $data = [$key => $value];
+
         $this->canSerialize && $this->serializeValues($data);
 
         return (bool) $this->storage->write($key, $data[$key], $ttl);
@@ -80,7 +80,7 @@ class CacheService extends AbstractCacheService implements CacheInterface
         $this->validateKey($key);
 
         return (bool) $this->storage->delete($key);
-    } 
+    }
 
     public function deleteMultiple($keys)
     {
