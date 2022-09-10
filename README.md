@@ -1,4 +1,4 @@
-# super-simple-cache
+# Super Simple Cache
 
 A simple cache library implementing PSR-16.
 
