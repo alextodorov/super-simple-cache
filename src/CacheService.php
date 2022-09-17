@@ -4,8 +4,10 @@ namespace SSCache;
 
 use Psr\SimpleCache\CacheInterface;
 
-class CacheService extends AbstractCacheService implements CacheInterface
+class CacheService extends AbstractCacheService implements CacheInterface, CacheSerializable
 {
+    use CacheSerialization;
+
     public function get($key, $default = null): mixed
     {
         $this->validateKey($key);
@@ -22,7 +24,7 @@ class CacheService extends AbstractCacheService implements CacheInterface
     public function getMultiple($keys, $default = null): iterable
     {
         if ($keys instanceof \Traversable) {
-            $keys = \iterator_to_array($keys, false);
+            $keys = \array_flip(\iterator_to_array($keys, true));
         }
 
         $this->validateKeys($keys);
@@ -47,6 +49,10 @@ class CacheService extends AbstractCacheService implements CacheInterface
     public function set($key, $value, $ttl = null)
     {
         $this->validateKey($key);
+
+        if ($value instanceof \Traversable) {
+            $value = \iterator_to_array($value, true);
+        }
 
         $data = [$key => $value];
 

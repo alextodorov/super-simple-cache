@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class DeleteClearHasCacheTest extends TestCase
 {
-    use CacheHelper;
+    use TestCacheHelper;
 
     public function testDelete(): void
     {

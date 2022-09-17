@@ -8,7 +8,7 @@ use SSCache\InvalidKey;
 
 class GetSetCacheTest extends TestCase
 {
-    use CacheHelper;
+    use TestCacheHelper;
 
     /** @dataProvider provideData */
     public function testSetGet(string $key, mixed $value, DateInterval|int|null $ttl): void
@@ -28,20 +28,6 @@ class GetSetCacheTest extends TestCase
     {
         $this->expectException(InvalidKey::class);
         $this->cacheService->set($key, 'test', 100);
-    }
-
-    public function testEnableDisableSerialization(): void
-    {
-        $this->cacheService->disableSerialization();
-
-        $this->cacheService->set('disableSerialization', 'test', 100);
-        
-        $this->assertSame('test', $this->cacheService->get('disableSerialization'));
-
-        $this->cacheService->enableSerialization();
-        $this->cacheService->set('enableSerialization', 'test2', 100);
-
-        $this->assertSame('test2', $this->cacheService->get('enableSerialization'));
     }
 
     public function testSetGetMultiple(): void

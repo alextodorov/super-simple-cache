@@ -6,8 +6,6 @@ use Closure;
 
 abstract class AbstractCacheService
 {
-    protected bool $canSerialize = true;
-
     public function __construct(protected CacheStorageInterface $storage)
     {
     }
@@ -26,30 +24,9 @@ abstract class AbstractCacheService
         }
     }
 
-    public function serializeValues(iterable &$values = []): void
-    {
-        foreach ($values as $key => $value) {
-            if ($this->isInvalid($value)) {
-                throw new InvalidArgument('Invalid value for key: ' . $key);
-            }
-
-            $values[$key] = \serialize($value);
-        }
-    }
-
     public function getWithClosure(string $key, Closure $closure): mixed
     {
         return $closure->call($this->storage, $key);
-    }
-
-    public function enableSerialization(): void
-    {
-        $this->canSerialize = true;
-    }
-
-    public function disableSerialization(): void
-    {
-        $this->canSerialize = false;
     }
 
     public function isInvalid(mixed $value): bool

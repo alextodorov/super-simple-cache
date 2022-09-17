@@ -4,7 +4,7 @@ namespace SSCache\UnitTest;
 
 use SSCache\CacheStorageInterface;
 
-class ArrayStorageHelper implements CacheStorageInterface
+class TestArrayStorageHelper implements CacheStorageInterface
 {
     private array $cache = [];
 

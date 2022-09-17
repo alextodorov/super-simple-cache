@@ -7,7 +7,7 @@ use SSCache\InvalidArgument;
 
 class ObjectTraversableCacheTest extends TestCase
 {
-    use CacheHelper;
+    use TestCacheHelper;
 
     public function testSetGetObject(): void
     {
@@ -27,5 +27,23 @@ class ObjectTraversableCacheTest extends TestCase
         $this->expectExceptionMessage('Invalid value for key: test');
 
         $this->assertTrue($this->cacheService->set('test', $value, 100));
+    }
+
+    public function testSetGetTraversable(): void
+    {
+        $data = [
+            'key' => 'new',
+            'key2' => 'new2',
+            'key4' => 'new4',
+        ];
+
+        $object = new DummyData();
+        $object->setData($data);
+
+        $this->cacheService->setMultiple($object);
+        $this->assertSame($data, $this->cacheService->getMultiple($object));
+
+        $this->cacheService->set('test1', $object);
+        $this->assertSame($data, $this->cacheService->get('test1'));
     }
 }

@@ -4,12 +4,12 @@ namespace SSCache\UnitTest;
 
 use SSCache\CacheService;
 
-trait CacheHelper
+trait TestCacheHelper
 {
     protected CacheService $cacheService;
 
     protected function setUp(): void
     {
-        $this->cacheService = new CacheService(new ArrayStorageHelper());   
+        $this->cacheService = new CacheService(new TestArrayStorageHelper());   
     }
 }
