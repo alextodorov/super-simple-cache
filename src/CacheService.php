@@ -14,11 +14,15 @@ class CacheService extends AbstractCacheService implements CacheInterface, Cache
 
         $item = $this->storage->read($key, $default);
 
-        if ($item) {
-            return $this->canSerialize ? \unserialize($item) : $item;
+        if (!$item) {
+            return $default;
         }
 
-        return $default;
+        if ($this->canSerialize) {
+            return $this->isIgbinaryActive ? \igbinary_unserialize($item) : \unserialize($item);
+        }
+
+        return $item;
     }
 
     public function getMultiple($keys, $default = null): iterable
@@ -39,7 +43,9 @@ class CacheService extends AbstractCacheService implements CacheInterface, Cache
             }
 
             if ($this->canSerialize) {
-                $items[$key] =  \unserialize($items[$key]);
+                $items[$key] =  $this->isIgbinaryActive ?
+                    \igbinary_unserialize($items[$key]) :
+                    \unserialize($items[$key]);
             }
         }
 
