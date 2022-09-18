@@ -42,3 +42,9 @@ It's up to you how to handle $ttl in the storage.
 For more details check out the [wiki].
 
 [wiki]: https://github.com/alextodorov/super-simple-cache/wiki
+
+
+License
+-----
+
+The Super Simple Cache is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
