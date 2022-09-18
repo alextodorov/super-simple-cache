@@ -12,7 +12,7 @@ class CacheSerializationTest extends TestCase
     {
         $this->cacheService->disableSerialization();
         $this->cacheService->set('disableSerialization', 'test', 100);
-        
+
         $this->assertSame('test', $this->cacheService->get('disableSerialization'));
 
         $this->cacheService->enableSerialization();
@@ -30,7 +30,7 @@ class CacheSerializationTest extends TestCase
         $this->assertSame('test', $this->cacheService->get('igbinary'));
 
         $this->cacheService->disableSerialization();
-        
+
         $this->assertSame('test', \igbinary_unserialize($this->cacheService->get('igbinary')));
 
         $this->cacheService->disableIgbinary();

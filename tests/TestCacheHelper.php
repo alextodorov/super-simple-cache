@@ -10,6 +10,6 @@ trait TestCacheHelper
 
     protected function setUp(): void
     {
-        $this->cacheService = new CacheService(new TestArrayStorageHelper());   
+        $this->cacheService = new CacheService(new TestArrayStorageHelper());
     }
 }

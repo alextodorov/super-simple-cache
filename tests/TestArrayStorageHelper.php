@@ -60,6 +60,6 @@ class TestArrayStorageHelper implements CacheStorageInterface
 
     public function exist(string $key): bool
     {
-        return isset($this->cache['key']);
+        return isset($this->cache[$key]);
     }
 }

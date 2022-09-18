@@ -44,7 +44,7 @@ class GetSetCacheTest extends TestCase
             $this->cacheService->getMultiple(\array_keys($values), 0)
         );
     }
-    
+
     public function testGetWithClosure(): void
     {
         $this->cacheService->set('key', 'test4', 100);

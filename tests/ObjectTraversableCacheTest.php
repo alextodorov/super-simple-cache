@@ -4,6 +4,7 @@ namespace SSCache\UnitTest;
 
 use PHPUnit\Framework\TestCase;
 use SSCache\InvalidArgument;
+use stdClass;
 
 class ObjectTraversableCacheTest extends TestCase
 {
@@ -21,7 +22,7 @@ class ObjectTraversableCacheTest extends TestCase
 
     public function testSetGetInvalidObject(): void
     {
-        $value = new \stdClass();
+        $value = new stdClass();
 
         $this->expectException(InvalidArgument::class);
         $this->expectExceptionMessage('Invalid value for key: test');

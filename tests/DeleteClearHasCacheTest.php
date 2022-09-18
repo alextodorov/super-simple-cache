@@ -11,7 +11,7 @@ class DeleteClearHasCacheTest extends TestCase
     public function testDelete(): void
     {
         $this->cacheService->setMultiple(['test1' => 4, 'test2' => 5], 100);
-    
+
         $this->assertTrue($this->cacheService->delete('test1'));
         $this->assertTrue($this->cacheService->delete('test2'));
 
@@ -26,7 +26,7 @@ class DeleteClearHasCacheTest extends TestCase
         ];
 
         $this->cacheService->setMultiple($values, 100);
-    
+
         $this->assertTrue($this->cacheService->deleteMultiple(\array_keys($values)));
 
         $this->assertSame(
@@ -41,7 +41,7 @@ class DeleteClearHasCacheTest extends TestCase
     public function testHas(): void
     {
         $this->cacheService->setMultiple(['has1' => 'has', 'has2' => 'has'], 100);
-    
+
         $this->assertTrue($this->cacheService->has('has2'));
         $this->assertTrue($this->cacheService->has('has1'));
         $this->assertFalse($this->cacheService->has('has3'));
@@ -50,7 +50,7 @@ class DeleteClearHasCacheTest extends TestCase
     public function testClear(): void
     {
         $this->cacheService->setMultiple(['has1' => 'has', 'has2' => 'has'], 100);
-    
+
         $this->assertTrue($this->cacheService->clear());
         $this->assertFalse($this->cacheService->has('has1'));
         $this->assertFalse($this->cacheService->has('has2'));

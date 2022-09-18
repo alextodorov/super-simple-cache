@@ -43,7 +43,7 @@ class CacheService extends AbstractCacheService implements CacheInterface, Cache
             }
 
             if ($this->canSerialize) {
-                $items[$key] =  
+                $items[$key] =
                     $this->isIgbinaryActive ? \igbinary_unserialize($items[$key]) : \unserialize($items[$key]);
             }
         }

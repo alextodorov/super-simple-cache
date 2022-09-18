@@ -8,7 +8,7 @@ trait CacheSerialization
 {
     protected bool $canSerialize = true;
     protected bool $isIgbinaryActive = false;
-    
+
     public function enableSerialization(): void
     {
         $this->canSerialize = true;
@@ -38,7 +38,7 @@ trait CacheSerialization
                 throw new InvalidArgument('Invalid value for key: ' . $key);
             }
 
-            
+
             $values[$key] = $serialize($value);
         }
     }
