@@ -1,36 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace SSCache\UnitTest;
 
-use PHPUnit\Framework\TestCase;
-use SSCache\InvalidArgument;
-use stdClass;
+use SSCache\UnitTest\Tester\CacheTester;
+use SSCache\UnitTest\Tester\IterableDataTester;
 
-class ObjectTraversableCacheTest extends TestCase
+class ObjectTraversableCacheTest extends CacheTester
 {
-    use TestCacheHelper;
+    private IterableDataTester $traversable;
 
-    public function testSetGetObject(): void
-    {
-        $value = new DummyObject();
-
-        $this->assertTrue($this->cacheService->set('test', $value, 100));
-        $result = $this->cacheService->get('test');
-
-        $this->assertSame('new', $result->getTest());
-    }
-
-    public function testSetGetInvalidObject(): void
-    {
-        $value = new stdClass();
-
-        $this->expectException(InvalidArgument::class);
-        $this->expectExceptionMessage('Invalid value for key: test');
-
-        $this->assertTrue($this->cacheService->set('test', $value, 100));
-    }
-
-    public function testSetGetTraversable(): void
+    protected function setUp(): void
     {
         $data = [
             'key' => 'new',
@@ -38,13 +19,28 @@ class ObjectTraversableCacheTest extends TestCase
             'key4' => 'new4',
         ];
 
-        $object = new DummyData();
-        $object->setData($data);
+        $this->traversable = new IterableDataTester();
+        $this->traversable->setData($data);
 
-        $this->cacheService->setMultiple($object);
-        $this->assertSame($data, $this->cacheService->getMultiple($object));
+        parent::setUp();
+    }
 
-        $this->cacheService->set('test1', $object);
-        $this->assertSame($data, $this->cacheService->get('test1'));
+    public function testTraversable(): void
+    {
+        $this->cache->set('test1', $this->traversable);
+
+        $this->assertSame($this->traversable, $this->cache->get('test1'));
+    }
+
+    public function testTraversableMulti(): void
+    {
+        $this->cache->setMultiple($this->traversable);
+
+        $this->assertSame(
+            $this->traversable->getData(),
+            $this->cache->getMultiple(
+                array_keys(iterator_to_array($this->traversable))
+            )
+        );
     }
 }

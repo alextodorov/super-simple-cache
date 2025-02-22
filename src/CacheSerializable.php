@@ -4,9 +4,7 @@ namespace SSCache;
 
 interface CacheSerializable
 {
-    public function enableSerialization(): void;
-    public function disableSerialization(): void;
-    public function enableIgbinary(): void;
-    public function disableIgbinary(): void;
-    public function serializeValues(iterable &$values = []): void;
+    public function serialize(iterable &$values = []): void;
+    public function unserialize(string $item): mixed;
+    public function isValid(mixed $value): bool;
 }

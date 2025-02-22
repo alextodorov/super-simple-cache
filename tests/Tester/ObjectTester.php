@@ -1,10 +1,12 @@
 <?php
 
-namespace SSCache\UnitTest;
+namespace SSCache\UnitTest\Tester;
 
-class DummyObject
+class ObjectTester
 {
-    private string $test = 'new';
+    public function __construct(private string $test = 'new')
+    {
+    }
 
     public function __serialize(): array
     {

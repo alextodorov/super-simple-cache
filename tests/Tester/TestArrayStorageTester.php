@@ -1,16 +1,19 @@
 <?php
 
-namespace SSCache\UnitTest;
+namespace SSCache\UnitTest\Tester;
 
+use DateInterval;
 use SSCache\CacheStorageInterface;
 
-class TestArrayStorageHelper implements CacheStorageInterface
+use function is_string;
+
+class TestArrayStorageTester implements CacheStorageInterface
 {
     private array $cache = [];
 
     public function read(string|iterable $key): mixed
     {
-        if (\is_string($key)) {
+        if (is_string($key)) {
             return $this->cache[$key] ?? false;
         }
 
@@ -22,9 +25,9 @@ class TestArrayStorageHelper implements CacheStorageInterface
         return $items;
     }
 
-    public function write(string|iterable $keys, mixed $value = null, \DateInterval | int | null $ttl = null): bool
+    public function write(string|iterable $keys, mixed $value = null, DateInterval | int | null $ttl = null): bool
     {
-        if (\is_string($keys)) {
+        if (is_string($keys)) {
             $this->cache[$keys] = $value;
 
             return true;
@@ -39,7 +42,7 @@ class TestArrayStorageHelper implements CacheStorageInterface
 
     public function delete(string|iterable $keys): bool
     {
-        if (\is_string($keys)) {
+        if (is_string($keys)) {
             unset($this->cache[$keys]);
 
             return true;

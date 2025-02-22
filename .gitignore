@@ -1,7 +1,9 @@
+.DS_STORE
 composer.phar
 /vendor/
 *.lock
 *.code-workspace
 *.drawio
 *.cache
+/code-coverage
 clover.xml

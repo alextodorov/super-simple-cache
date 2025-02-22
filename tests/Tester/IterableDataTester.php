@@ -1,12 +1,12 @@
 <?php
 
-namespace SSCache\UnitTest;
+namespace SSCache\UnitTest\Tester;
 
 use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 
-class DummyData implements IteratorAggregate
+class IterableDataTester implements IteratorAggregate
 {
     private $data = [];
 
